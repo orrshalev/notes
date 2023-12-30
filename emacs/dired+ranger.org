@@ -1,0 +1,1 @@
+#+title: Dired with Ranger

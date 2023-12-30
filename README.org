@@ -1,1 +1,8 @@
 #+title: Orr's Notes About Everything
+
+* Table of Content
++ [[Emacs]]
+  + [[Org mode]]
+
+* Emacs
+** Org mode
