@@ -1,1 +1,9 @@
 #+title: Dired with Ranger
+
+| Key Binding | Description             |
+|-------------+-------------------------|
+| ~t~         | Toggle mark             |
+| ~R~         | Rename                  |
+| ~z P~       | Toggle full ranger mode |
+| ~z h~       | Toggle hidden           |
+| ~D~         | Delete                  |

@@ -1,0 +1,6 @@
+#+title: Magit
+
+| Key Binding | Description           |
+|-------------+-----------------------|
+| ~C-c C-c~   | Submit commit message |
+| ~C-c C-k~   | Cancel commit         |

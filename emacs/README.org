@@ -1,4 +1,4 @@
 #+title: Emacs
 
 * Table of Content
-+ [[file:dired+ranger.org][Emacs]]
++ [[file:dired+ranger.org][Dired with Ranger]]
