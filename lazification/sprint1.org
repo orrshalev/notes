@@ -1,0 +1,8 @@
+#+title: Sprint 1
+
+* Main goals
+- New graph and Java method generation via Javassits
+
+* Methods to implement
+- ~org.graalvm.compiler.core.phases.common.lazification.ProgramSlice.computeThunkType~
+- ~org.graalvm.compiler.core.phases.common.LazificationPhase.updateWithThunk~

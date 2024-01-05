@@ -1,0 +1,9 @@
+#+title: LSP
+
+* Universal
+
+| Key Binding     | Description          |
+|-----------------+----------------------|
+| ~g d~           | Goto definition      |
+| ~SPC c l <key>~ | LSP options          |
+| ~SPC c l g t~   | Goto type definition |
