@@ -1,0 +1,19 @@
+#+title: 2nd Class
+
+Any arbitrary value obtained from dataset is called /statistic/
+
+Nature of statistics is the study of functions that output statistics
+
+Law of large numbers, in terms of functions
+
+Should get better with at the moment LaTeX, figure out how to render LaTeX with org
+
+Draw neueral nets as linear combination of linear combinations with activation function to provide non-linearity
+
+Not urgent, but should set up Python
+
+/Membership attack/ means infering if someone is in dataset
+
+Maybe read deep learning book?
+
+Security vs privacy
