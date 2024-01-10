@@ -2,6 +2,7 @@
 
 * Main goals
 - New graph and Java method generation via Javassits
+** This and [[file:spring2.org][sprint 2]] ideally due by 1/29/24
 
 * Methods to implement
 - ~org.graalvm.compiler.core.phases.common.lazification.ProgramSlice.computeThunkType~

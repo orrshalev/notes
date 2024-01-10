@@ -1,0 +1,9 @@
+#+title: First Class Notes
+
+First 3 chapters of main book are best, rest are obsolete
+
+Variable in real domain is called covariate
+
+dom(x) means domain of x
+
+In theoretical computer science can call an observation an "example"

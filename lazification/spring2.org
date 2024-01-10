@@ -1,0 +1,7 @@
+#+title: Sprint 2
+
+* Main goals
+- All remaining methods of ~ProgramSlice~
+** This and [[file:sprint1.org][sprint 1]] ideally due by 1/29/24
+
+* Methods to implement

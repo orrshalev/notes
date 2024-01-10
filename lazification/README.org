@@ -1,1 +1,5 @@
 #+title: Lazification Project
+
+* Sprints
+- [[file:sprint1.org][S1]]
+- [[file:spring2.org][S2]]

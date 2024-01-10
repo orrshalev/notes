@@ -7,3 +7,6 @@
 | ~z P~       | Toggle full ranger mode |
 | ~z h~       | Toggle hidden           |
 | ~D~         | Delete                  |
+| ~+~         | New folder              |
+| ~o [key]~   | Sort                    |
+| ~o t~       | Sort by time            |
