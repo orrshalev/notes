@@ -1,0 +1,14 @@
+#+title: 2nd Class
+
+Projection operations rigorous definition, inverse projection operation
+
+Parallax, light physics, closer objects are, the parrallax error increases
+
+Stereograms?
+
+AI composed of:
+- perception: translation of signals to high-level symbols
+- cognition: relates the high-level symbols to world concepts
+- reasoning: infer relationships from world concepts
+- action: change the state of the world
+- learning: learning world concepts based on data
