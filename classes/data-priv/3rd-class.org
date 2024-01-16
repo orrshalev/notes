@@ -1,0 +1,5 @@
+#+title: 3rd Class
+
+Linear function: $f(ax + b)  = af(x) + b$, try this out
+
+$k$-anonymity is about creating equivalence classes using quasi-sensitive data
