@@ -2,4 +2,7 @@
 
 Linear function: $f(ax + b)  = af(x) + b$, try this out
 
-$k$-anonymity is about creating equivalence classes using quasi-sensitive data
+$k$-anonymity is about creating equivalence classes using non-sensitive data that may be used to identify individual
+and reveal sensitive attributes
+
+Coarsening values into mroe general ones can be done via *supression*, *range*, *capping*

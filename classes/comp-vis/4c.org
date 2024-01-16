@@ -1,0 +1,16 @@
+#+title: 4th Class
+
+Review *Gauss' law for thin sphereical lens*, how cameras work
+
+Focus related to blur
+
+Perspective projection formulas using $f$, perspective foreshortening is $Z_s$ term
+
+Quantization means discretization of brightness values
+
+A digital image has spatial sampling parameters (spatial resoultion, pixel size, pixel density)
+and quantization paramters (num bits per pixel, spectral band)
+
+Aliasing is distorition of features as a result of reduced spatial resolution
+
+Patchy images is result of reduced quantization, pseudo-contours appear when continuous objects get quantized
