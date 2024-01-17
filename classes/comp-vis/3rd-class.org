@@ -1,0 +1,29 @@
+#+title: 3rd Class
+
+Two /broad/ approaches to image segmentation:
+1. Region-based approach - clustering of similar pixels into regions
+2. Find bounderies/contours between dissimilar pixels
+Most modern algorithms use both.
+
+Going further, we can have /feature extraction/, meaningful descriptions of the entities in the segmented image
+
+Orders of discontinuity? Depends on order of derivative
+
+/High-level vision/ involves using memory to match feature description to that memory (model)
+
+In high level, besides recognizing objeccts in the image, we can establish semantic relationships
+(spatio-temporal) between objects (such as above-below)
+
+3 schools of computer vision reserch:
+1. Neuro physiology - the physical mechanics
+2. Perceptual pshycology - where cognition comes in, underlying psychology of vision and how they interprent them
+3. Computer vision algorithms and systems
+All build on each other, in course we are focused on 3.
+
+Techniques used in CV:
+1. Geometry - describing the 3D world, both imaging (for objects) and scene (for interactions)
+2. Physics - scene illumination and reflection, optics of data source such as camera
+3. Statistics - description of large data
+4. Calculus - measuring changes
+5. Graph theory and combinatorics - semantic relationships between items, can be related to topology as well
+6. Domain knowledge

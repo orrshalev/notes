@@ -1,0 +1,5 @@
+#+title: Class 4
+
+*[[wikipedia:Softmax_function][Softmax]]* is generalization of sigmoid function, used for deep learning
+
+Statistical symbol for independent events upside down T
