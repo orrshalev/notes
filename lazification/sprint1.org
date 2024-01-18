@@ -7,3 +7,9 @@
 * Methods to implement
 - ~org.graalvm.compiler.core.phases.common.lazification.ProgramSlice.computeThunkType~
 - ~org.graalvm.compiler.core.phases.common.LazificationPhase.updateWithThunk~
+
+* Questions
+
+I am writing computeThunkType in ProgramSlice. I want to use Javassist to construct a new resolved type that has the following properties:
+- contains the member variables of parameter originalClass
+-
