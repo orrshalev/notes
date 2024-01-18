@@ -1,0 +1,36 @@
+** VM options
+:PROPERTIES:
+:CUSTOM_ID: vm-options
+:END:
+=-Dgraal.Dump=:1= to create graph =-XX:+EagerJVMCI= to force JIT
+compilation. [[https://bugs.openjdk.org/browse/JDK-8195632][source]]
+=-XX:+PrintCompilation= =-XX:CompileOnly=CallByValue::caller=
+
+** Options from [[https://github.com/oracle/graal/blob/master/truffle/docs/Optimizing.md][docs]]
+:PROPERTIES:
+:CUSTOM_ID: options-from-docs
+:END:
+*These are mostly wrong*
+
+To make the best use of the former options, limit what is compiled to
+the methods that you are interested in.
+
+- =--engine.CompileOnly=foo= restricts compilation to methods with =foo=
+  in their name. Use this in combination with returning a value or
+  taking parameters to avoid code being compiled away.
+
+- =--engine.CompileImmediately= compiles methods as soon as they are
+  run.
+
+- =--engine.BackgroundCompilation=false= compiles synchronously, which
+  can simplify things.
+
+- =--compiler.Inlining=false= disables inlining which can make code
+  easier to understand.
+
+- =--engine.OSR=false= disables on-stack-replacement (compilation of the
+  bodies of =while= loops for example) which can make code easier to
+  understand.
+
+- =--engine.Compilation=false= turns off Truffle compilation all
+  together.

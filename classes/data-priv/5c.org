@@ -1,0 +1,9 @@
+#+title: 5th Class
+
+~range~ is outcome of algorithm $M$
+
+~exp~ means $e^{\e}$
+
+Differential privacy figure also bounded on lower end by $e^{-\e}$
+
+$\e$ is *privacy parameter* aka *privacy budget*

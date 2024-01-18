@@ -1,0 +1,35 @@
+Using release 21 git of =oracle/graal= Using Oracle GraalVM 21 as
+runtime
+
+Was finally able to get compiled vm as runner:
+
+- Make current dir =graal/compiler=
+- =graal build= if haven't
+- =graal vm= spawns java with compiler as top tier jit
+
+Phase impl is in =org.graalvm.compiler.phases= Implemented phases are in
+=org.graalvm.compiler.phases.common=
+
+Studying phases implementations in
+=org.graalvm.compiler.phases.common= ) phase will likely be very
+helpful. Specifically can look at
+=org.graalvm.compiler.phases.common.BoxNodeOptimizationPhase= as an
+example.
+=org.graalvm.compiler.phases.common.ConditionalEliminationPhaseseems=
+seems like another good one.
+
+** IGV
+:PROPERTIES:
+:CUSTOM_ID: igv
+:END:
+Got IGV to work by running =sdk use java 21-graal= and running on
+=release/graal-vm/23.1= branch =mx -p graal-latest/compiler igv=
+
+IGV shows that the phases passed for graal is: 1. After parsing 2.
+Before phase HighTierLowering 3. After high tier 4. After mid tier 5.
+After low tier
+
+Maybe graph builder is the answer? Check bytecode directly and build
+graph as lazified
+
+=mx vm -cp /home/orr/repos/mine/lazification-example/target/classes com.org.lazyexample.Main > debug.txt 2> /dev/null=

@@ -1,0 +1,46 @@
+** Synopsis
+:PROPERTIES:
+:CUSTOM_ID: synopsis
+:END:
+** Context
+:PROPERTIES:
+:CUSTOM_ID: context
+:END:
+- LLVM
+- Code examples
+- Graph examples ## Solution
+- JIT / JVMCI
+- GraalVM
+- Libraries included (for everything including profiling)
+- [[https://www.graalvm.org/latest/tools/graalvm-insight/][GraalVM
+  Insight]] for performance evaluation ## Class design ### Top-level
+  lazyfication
+- Need to create something that is an instance of profiling information
+  for each call site, in Wyvern it is called =WyvernCallSiteProfInfo=,
+  containts number of times the call site was called, the number of
+  times each argument was uniquely evaluated at least once per call, and
+  the total number of evaluations for each argument.
+- Need a lazify callsite function (=Lazification.h/lazifyCallsite=) that
+  performs it through value slicing.
+- Need a function to determine if should be lazified
+  (=Lazification.h/shouldLazifyCallsitePGO=)
+- Need to be able to dump and load profiling data
+  (=Lazification.h/loadProfileInfo=) ### Program slicing
+- Need program slice function (=ProgramSlice.h/ProgramSlice=) that takes
+  a function and a parameter (slice criterion) and creates a backwards
+  slice.
+- A =ProgramSlice.h/canOutline= function to determine whether program
+  slice can be safely outlined into a delegate funciton.
+- A =ProgramSlice.h/outline= to return the outline/delegate function.
+  Optionally seperate memoized version into
+  =ProgramSlice.h/memoizedOutline=
+- Private functions in =ProgramSlice.h= likely important for internals
+- Alias analysis to evaluate slice safety ### Instrumentation
+- Need entrypoints to before, during, after callsite ### Find Lazifyable
+- Find (lazifiable function, lazifiable argument) pair
+- Find lazifiable paths in CFG (=FindLazyfiable.h/findLazyFiablePaths=)
+  ​### Questions
+- Do we see the same benefits for JIT compiling?
+- Is the cost addition worth it? ### Goals
+- Improve runtime performance of applications with lazification
+  optimization
