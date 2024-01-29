@@ -1,0 +1,23 @@
+#+title: Notes For Today
+
+
+\Phi node 17 represents i, 16 represent value if /if/ inside loop is not executed, 34
+represents value if /if/ inside loop is executed
+
+Current plan: Get all data dependencies via finding inputs that are ~ValueNode~. Get control
+dependencies by getting phi function's ~Merge~ node, getting its succesor blocks that are
+not successors of parameter invoke block, and getting data dependencies of control nodes
+in found succesor blocks
+
+EndNodes dont take begin nodes as input?
+
+Arguments of phi-functions in loop headers are not considered as part of the
+backward slice -> if value of interest is in loop (dominated by ~LoopBegin~ n),
+if terminator ~ControlSplitNode~ m is succesor to n, only include values from within loop
+
+Cannot contain StoreIndexedNode
+
+Instructions that may trigger exceptions
+
+For phi's merge value, include all successor control nodes that are not successors to function of interest's
+Invoke node (need to include nodes within block of Invoke's that are not after it)

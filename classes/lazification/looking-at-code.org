@@ -7,6 +7,10 @@ Was finally able to get compiled vm as runner:
 - =graal build= if haven't
 - =graal vm= spawns java with compiler as top tier jit
 
+Dumb command:
+
+mx vm -cp /home/orr/repos/mine/lazification-example/target/classes com.org.lazyexample.Main > debug.txt 2> /dev/null
+
 Phase impl is in =org.graalvm.compiler.phases= Implemented phases are in
 =org.graalvm.compiler.phases.common=
 

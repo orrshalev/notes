@@ -13,3 +13,6 @@
 I am writing computeThunkType in ProgramSlice. I want to use Javassist to construct a new resolved type that has the following properties:
 - contains the member variables of parameter originalClass
 -
+
+* Notes
+For now, using Graal ~Node~ in place of LLVM ~Instruction~ and ~ValueNode~ instead of LLVM ~Value~,

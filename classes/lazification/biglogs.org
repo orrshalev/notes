@@ -1,0 +1,156 @@
+#+title: Biglogs
+
+Used ~printDebugBlocks~ to find blocks of CallByValue.caller:
+
+
+These are the data deps found for value proxy without gates:
+
+#+begin_src
+Invoke node:40|Invoke#CallByValue.calee	 1|Parameter(0)  2|Parameter(1)  3|Parameter(2)  6|Constant(10, i32)  7|MethodCallTarget  8|Invoke#Integer.parseInt  9|FrameState@1  10|FrameState@6  11|Constant(-1, i32)  12|Constant(0, i32)  14|EndNode  15|LoopBegin  16|ValuePhi(11 34, i32)  17|ValuePhi(12 37, i32)  18|FrameState@11  21|LoopExit  22|ValueProxy  23|FrameState@35  31|EndNode  32|Merge  33|EndNode  34|ValuePhi(16 17, i32)  35|FrameState@29  36|Constant(1, i32)  37|+
+Not included:  0|StartNode  4|FrameState@0  5|FrameState@1  19|<  24|Begin  25|If  26|LoadIndexed  27|==  28|Begin  29|Begin  30|If  38|LoopEnd  39|MethodCallTarget  41|FrameState@42  42|Return
+#+end_src
+
+with gates:
+
+#+begin_src
+#Invoke node:40|Invoke#CallByValue.calee	 1|Parameter(0)  2|Parameter(1)  3|Parameter(2)  6|Constant(10, i32)  7|MethodCallTarget  8|Invoke#Integer.parseInt  9|FrameState@1  10|FrameState@6  11|Constant(-1, i32)  12|Constant(0, i32)  14|EndNode  15|LoopBegin  16|ValuePhi(11 34, i32)  17|ValuePhi(12 37, i32)  18|FrameState@11  19|<  21|LoopExit  22|ValueProxy  23|FrameState@35  25|If  26|LoadIndexed  27|==  30|If  31|EndNode  32|Merge  33|EndNode  34|ValuePhi(16 17, i32)  35|FrameState@29  36|Constant(1, i32)  37|+
+Not included:  0|StartNode  4|FrameState@0  5|FrameState@1  24|Begin  28|Begin  29|Begin  38|LoopEnd  39|MethodCallTarget  41|FrameState@42  42|Return
++begin_src
+#+end_src
+
+Blocks:
+
+#+begin_src
+
+DominatorTree: B0(!B1(B2(B3() B4() !B5() ) B6() ) )
+
+BLOCKSTART: B0
+0|StartNode
+8|Invoke#Integer.parseInt
+14|EndNode
+
+BLOCKEND: B0
+
+BLOCKSTART: B1
+15|LoopBegin
+25|If
+
+BLOCKEND: B1
+
+BLOCKSTART: B2
+24|Begin
+26|LoadIndexed
+30|If
+
+BLOCKEND: B2
+
+BLOCKSTART: B3
+29|Begin
+33|EndNode
+
+BLOCKEND: B3
+
+BLOCKSTART: B4
+28|Begin
+31|EndNode
+
+BLOCKEND: B4
+
+BLOCKSTART: B5
+32|Merge
+38|LoopEnd
+
+BLOCKEND: B5
+
+BLOCKSTART: B6
+21|LoopExit
+40|Invoke#CallByValue.calee
+42|Return
+
+BLOCKEND: B6
+
+GRAPHEND
+#+end_src
+
+phis:
+
+#+begin_src
+16|ValuePhi(11 34, i32) inputs: 15|LoopBegin  11|Constant(-1, i32)  34|ValuePhi(16 17, i32)  values:  11|Constant(-1, i32)  34|ValuePhi(16 17, i32)  merge:  15|LoopBegin
+17|ValuePhi(12 37, i32) inputs: 15|LoopBegin  12|Constant(0, i32)  37|+  values:  12|Constant(0, i32)  37|+  merge:  15|LoopBegin
+34|ValuePhi(16 17, i32) inputs: 32|Merge  16|ValuePhi(11 34, i32)  17|ValuePhi(12 37, i32)  values:  16|ValuePhi(11 34, i32)  17|ValuePhi(12 37, i32)  merge:  32|Merge
+
+#+end_src
+
+"correct":
+#+begin_src
+Invoke node:40|Invoke#CallByValue.calee	 1|Parameter(0)  2|Parameter(1)  3|Parameter(2)  6|Constant(10, i32)  7|MethodCallTarget  8|Invoke#Integer.parseInt  9|FrameState@1  10|FrameState@6  11|Constant(-1, i32)  12|Constant(0, i32)  14|EndNode  15|LoopBegin  16|ValuePhi(11 34, i32)  17|ValuePhi(12 37, i32)  18|FrameState@11  19|<  21|LoopExit  22|ValueProxy  23|FrameState@35  24|Begin  25|If  26|LoadIndexed  27|==  28|Begin  29|Begin  30|If  31|EndNode  32|Merge  33|EndNode  34|ValuePhi(16 17, i32)  35|FrameState@29  36|Constant(1, i32)  37|+  38|LoopEnd
+Not included:  0|StartNode  4|FrameState@0  5|FrameState@1  39|MethodCallTarget  40|Invoke#CallByValue.calee  41|FrameState@42  42|Return
+
+#+end_src
+
+in loop
+#+begin_src
+Data dependencies before control:  32|EndNode  33|ValuePhi(16 17, i32)  30|EndNode  31|Merge
+Control dependencies:  32|EndNode  36|Invoke#CallByValue.calee  40|LoopEnd  41|Return  15|LoopBegin  21|LoopExit  23|Begin  24|If  25|LoadIndexed  27|Begin  28|Begin  29|If  30|EndNode  31|Merge
+Data dependencies:  1|Parameter(0)  2|Parameter(1)  3|Parameter(2)  6|Constant(10, i32)  7|MethodCallTarget  8|Invoke#Integer.parseInt  9|FrameState@1  10|FrameState@6  11|Constant(-1, i32)  12|Constant(0, i32)  14|EndNode  15|LoopBegin  16|ValuePhi(11 33, i32)  17|ValuePhi(12 39, i32)  18|FrameState@11  19|<  24|If  25|LoadIndexed  26|==  29|If  30|EndNode  31|Merge  32|EndNode  33|ValuePhi(16 17, i32)  34|FrameState@29  38|Constant(1, i32)  39|+
+#+end_src
+
+with loop;
+
+#+begin_src
+DominatorTree: B0(!B1(B2(B3() B4() !B5() ) B6() ) )
+
+BLOCKSTART: B0
+0|StartNode
+8|Invoke#Integer.parseInt
+14|EndNode
+
+BLOCKEND: B0
+
+BLOCKSTART: B1
+15|LoopBegin
+24|If
+
+BLOCKEND: B1
+
+BLOCKSTART: B2
+23|Begin
+25|LoadIndexed
+29|If
+
+BLOCKEND: B2
+
+BLOCKSTART: B3
+28|Begin
+32|EndNode
+
+BLOCKEND: B3
+
+BLOCKSTART: B4
+27|Begin
+30|EndNode
+
+BLOCKEND: B4
+
+BLOCKSTART: B5
+31|Merge
+36|Invoke#CallByValue.calee
+40|LoopEnd
+
+BLOCKEND: B5
+
+BLOCKSTART: B6
+21|LoopExit
+41|Return
+
+BLOCKEND: B6
+
+GRAPHEND
+#+end_src
+
+Correct loop:
+#+begin_src
+ 16|ValuePhi(12 28, i32)  22|Begin  27|Constant(1, i32)  12|Constant(0, i32)  28|+  14|EndNode  15|LoopBegin
+Not included:  0|StartNode  1|Parameter(0)  3|Parameter(2)  4|FrameState@0  5|FrameState@1  6|Constant(10, i32)  7|MethodCallTarget  8|Invoke#Integer.parseInt  9|FrameState@1  10|FrameState@6  11|Constant(-1, i32)  17|FrameState@11  18|<  20|LoopExit  21|FrameState@34  23|If  24|MethodCallTarget  25|Invoke#CallByValue.calee  26|FrameState@28  29|LoopEnd  30|Return
+
+#+end_src

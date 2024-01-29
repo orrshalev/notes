@@ -2,7 +2,7 @@
 :PROPERTIES:
 :CUSTOM_ID: vm-options
 :END:
-=-Dgraal.Dump=:1= to create graph =-XX:+EagerJVMCI= to force JIT
+=-Dgraal.Dump=:3= to create graph =-XX:+EagerJVMCI= to force JIT
 compilation. [[https://bugs.openjdk.org/browse/JDK-8195632][source]]
 =-XX:+PrintCompilation= =-XX:CompileOnly=CallByValue::caller=
 
