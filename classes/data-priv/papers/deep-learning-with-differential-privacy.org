@@ -1,0 +1,12 @@
+#+title: Deep Learning With Differential Privacy
+
+* Introduction
+
+* Background
+
+- Explanation of usage of Gaussian distribution for DP
+- Explanation of loss function
+
+* Our Approach
+
+* Implementation

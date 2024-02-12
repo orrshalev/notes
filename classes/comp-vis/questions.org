@@ -1,0 +1,13 @@
+#+title: Questions
+
+Two page requirement
+
+MPC
+
+Are transformers viable
+
+Cost function
+
+note for self: APA
+
+Opacus - privacy budget

@@ -1,0 +1,20 @@
+#+TITLE: Value Slicing in Graal Demo
+#+AUTHOR: Orr Shalev
+:REVEAL_PROPERTIES:
+#+REVEAL_INIT_OPTIONS: transition: 'none'
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_EXTRA_CSS: ./demo-presentation.css
+#+REVEAL_THEME: night
+#+OPTIONS: timestamp:nil toc:nil num:nil
+#+REVEAL_MARGIN: 0.4
+:END:
+
+* Describe lazification and value slicing as the two large contributions of the paper my work is expanding on
+Page 2
+* LLVM Control Flow Graph
+[[file:./llvm-cfg.png]]
+* Graal Graph
+[[file:./graal-graph.png]]
+* The End
+  thanks!!
+* Pages 2,9,10

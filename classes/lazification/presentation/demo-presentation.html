@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Value Slicing in Graal Demo</title>
+<meta name="author" content="Orr Shalev"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/night.css" id="theme"/>
+
+<link rel="stylesheet" href="./demo-presentation.css"/>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1 class="title">Value Slicing in Graal Demo</h1><h2 class="author">Orr Shalev</h2>
+</section>
+
+<section>
+<section id="slide-org26de549">
+<h2 id="org26de549">Describe lazification and value slicing as the two large contributions of the paper my work is expanding on</h2>
+<p>
+Page 2
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org7e4c5f2">
+<h2 id="org7e4c5f2">Show examples of CFGs in LLVM vs Graal</h2>
+<div class="outline-text-2" id="text-org7e4c5f2">
+</div>
+</section>
+<section id="slide-org38af4a3">
+<h3 id="org38af4a3">LLVM Control Flow Graph</h3>
+
+<div id="org3b2fe7a" class="figure">
+<p><img src="./llvm-cfg.png" alt="llvm-cfg.png" />
+</p>
+</div>
+</section>
+<section id="slide-org374ac0f">
+<h3 id="org374ac0f">Graal Graph</h3>
+
+<div id="orge406ab1" class="figure">
+<p><img src="./graal-graph.png" alt="graal-graph.png" />
+</p>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org1ec7c76">
+<h2 id="org1ec7c76">The End</h2>
+<p>
+thanks!!
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/search/search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom/zoom.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+mouseWheel: false,
+fragmentInURL: false,
+hashOneBasedIndex: false,
+pdfSeparateFragments: true,
+overview: true,
+margin: 0.40,
+
+transition: 'convex',
+transitionSpeed: 'default',
+
+// Plugins with reveal.js 4.x
+plugins: [ RevealMarkdown, RevealNotes, RevealSearch, RevealZoom ],
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+]
+
+});
+</script>
+</body>
+</html>

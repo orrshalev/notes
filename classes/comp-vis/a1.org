@@ -1,0 +1,3 @@
+#+title: Assignment 1
+
+In chapter 2, page 23 for iterative CCL
