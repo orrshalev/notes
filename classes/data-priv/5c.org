@@ -4,6 +4,25 @@
 
 ~exp~ means $e^{\e}$
 
-Differential privacy figure also bounded on lower end by $e^{-\e}$
+Differential privacy figure also bounded on lower end by e^{-\epsilon}
 
-$\e$ is *privacy parameter* aka *privacy budget*
+\epsilon is *privacy parameter* aka *privacy budget*
+
+$||x|| = ||x||_2$ = square root of sum of squares
+$||x||_1$ = sum of absolute values
+$||x||_{\infty}$ = max of absolute values
+$||x||_0$ = count of non-zero values
+
+To be distance, must be non negative, distance between two points should be commutative, triangle inequality (notice geometric interpretation)
+
+$q: X^n \rightarrow R^k$
+
+$\Delta q = \max_{D1,D2}||q(D_1) - q(D_2)||_1 = |q(D_1) - q(D_2)|$
+
+* showing that laplace mechanism satisfies differential privacy
+
+M(D) = q(D) + Y$, $Y \related Lap(0, \lambda = \frac{\Delta q}{\epsilon})
+
+f(x) = \frac{1}{2 \lambda} exp(- \frac{|x - \mu}{\lambda})
+
+\frac{Pr[Y_1 = q(D_1) - r]}{Pr[Y_2 = q(D_2) - r]} =

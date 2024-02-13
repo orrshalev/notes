@@ -1,0 +1,10 @@
+#+title: Interesting Papers
+
+Latent-NeRF for Shape-Guided Generation of 3D Shapes and Textures
+Gal Metzer · Elad Richardson · Or Patashnik · Raja Giryes · Daniel Cohen-Or
+
+ABLE-NeRF: Attention-Based Rendering With Learnable Embeddings for Neural Radiance Field
+Zhe Jun Tang · Tat-Jen Cham · Haiyu Zhao
+
+RT-NeRF: Real-Time On-Device Neural Radiance Fields Towards Immersive AR/VR Rendering
+Chaojian Li, Sixu Li, Yang Zhao, Wenbo Zhu, Yingyan Lin

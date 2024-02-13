@@ -1,0 +1,25 @@
+#+title: Papers For Project
+
+Abadi, Martin, Andy Chu, Ian Goodfellow, H. Brendan McMahan, Ilya Mironov, Kunal Talwar, and Li Zhang.
+“Deep Learning with Differential Privacy.”
+In Proceedings of the 2016 ACM SIGSAC Conference on Computer and Communications Security, 308–18. CCS ’16.
+
+Mironov, I.
+“Rényi Differential Privacy.”
+In 2017 IEEE 30th Computer Security Foundations Symposium (CSF), 263–75, 2017
+
+Lee, Jaewoo, and Daniel Kifer.
+“Scaling up Differentially Private Deep Learning with Fast Per-Example Gradient Clipping.”
+Proceedings on Privacy Enhancing Technologies 2021, no. 1 (2021): 128–44
+
+Yu, Da, Huishuai Zhang, Wei Chen, Jian Yin, and Tie-Yan Liu.
+“Large Scale Private Learning via Low-Rank Reparametrization.”
+In Proceedings of the 38th International Conference on Machine Learning, 12208–18. PMLR, 2021
+
+⋆ De, Soham, Leonard Berrada, Jamie Hayes, Samuel L. Smith, and Borja Balle.
+“Unlocking High-Accuracy Differentially Private Image Classification through Scale,”
+https://doi.org/10.48550/arXiv.2204.13650.
+
+⋆ Sander, Tom, Pierre Stock, and Alexandre Sablayrolles.
+“TAN Without a Burn: Scaling Laws of DP-SGD.”
+arXiv, May 24, 2023. https://doi.org/10.48550/arXiv.2210.03403.

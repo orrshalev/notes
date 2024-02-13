@@ -1,0 +1,63 @@
+#+title: 2/6/24 Notes
+
+* Variable thresholding for non-uniform background
+- If there is systematic variation in the intensities of background pixels, you want to substract the variation
+  - Systematic means that variation can be modeled by deterministic function - this is a regression problem
+  - There can still be noise, but that noise is added to deterministic results
+- Example of variation in background includes lighting: closer background may be more well
+    lit than further away
+- There is a tradeoff - the smaller the patches, the smaller the sample size, the larger the error
+** Methodology
+- Assumption: the object of interest is small relative to the background, so variation
+  of the entire image can be primarily attributed to the background
+  - The ratio of foreground to background desired can be empirically determined via checking for error
+- Fit a predetermined function (e.g. linear regression) to the pixel intensities in the image
+  - The coefficients of the function are determined to minimize some error metric (e.g. sum of square
+    error)
+  - He explained how linear regression works via explaining error metric
+*** Linear regression example (1st order)
+1. Fit a function to all the image intensity pixels \(I(x,y)\):
+    \[ F(x,y) = Ax + By + C \]
+2. Compute \(i_{d}(x,y)\):
+    \[ I_{d}(x,y) = I(x,y) - F(x,y) \]
+3. Normalize \(I_{d}(x,y)\) to the intensity range (e.g. for standard grayscale, 0-255) to \(I_{dnorm}(x,y)\)
+4. Threshold \(I_{dnorm}(x,y)\) using any thresholding technique (e.g. iterative thresholding)
+*** Quadratic regression example (2nd order)
+\[ F(x,y) = Ax^2 + By^2 +Cxy + Dx + Ey + F \]
+
+Count of coefficients in the model increase exponentially with model order.
+Higher order can introduce overfitting since now we are fitting for the noise as well.
+We should strive for balance between accuracy in higher order vs overfitting.
+
+An additional limitation of higher order models is greater computation resources needed.
+
+Typically in computer graphics people don't use anything over cubic regression (3rd order).
+He decided to write the equation for that which took approximately 32 seconds.
+
+* Enhanced histogram-based thresholding with incorporation of spatial continuity information
+
+A limitation of pixel histogram-based techniques is that we do not consider spatial information.
+
+If there are overlapping distributions (e.g. foreground and background distributions are different),
+a threshold chosen will misclassify both background and foreground pixels:
+
+[[file:IMG_3997.png][picture1]]
+
+We want to enhance histogram-based thresholding with incorporation of spatial continuity information (see image):
+1. Select 2 thresholds T_{1} and T_{2} - conservative thresholds (see image for example)
+2. Using thresholds T_{1} and T_{2}, classify the pixels into 3 classes / regions:
+   - R_{1} - Confirmed foreground pixel with gray values less than T_{1}
+   - R_{2} - Mixed pixels with gray values between T_{1} and T_{2}
+   - R_{3} - Confirmed background pixel with gray values greater than T_{2}
+3. Visit each pixel in class R_{2}. If the pixel has a neighbor (4-neighbor or 8-neighbor)
+     from class R_{1}, then reassign this pixel to R_{1}
+4. Repeat the above step until no more R_{2} pixels are reassigned
+5. Reassign each remaining R_{2} pixels to R_{3}
+
+[[file:IMG_3998.png][picture2]]
+
+The above uses spatial information: if a pixel we are unsure about is close to the object of interest,
+we should classify it as part of the object, if it is far away we should not. This reduces likelihood of
+misclassification when compared to previous histogram-based thresholding methods.
+
+In next classes we'll discuss spatial distributions - so far histograms were spectral distributions.
