@@ -1,0 +1,9 @@
+#+title: Suggested Papers
+
+* Composition
+
+- GIRAFFE
+- NeRF++
+- Fig-NeRF
+- NeRF in the Wild (NeRF-W)
+- Unsupervised Discovery of Object Radiance Fields
