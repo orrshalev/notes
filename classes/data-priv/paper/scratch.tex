@@ -1,0 +1,69 @@
+Our model follows a modified version of the CoAtNet architecture \cite{b9}. The CoAtNet architecture
+consists of stacked convolution and multi-head self-attention layers. The network is organized into 5
+stages \((S0, S1, S2, S3, S4)\). S0 is the convolutional stem; S1, S2, \& S3 are MBConv blocks with
+squeeze-excitation, and S4 is a Transformer block. While the authors of CoAtNet experiemented with adding
+more transformer blocks, we only include a single Transformer block for reasons that will be elaborated
+upon in model components section.
+
+As one of our main motivations is to measure the impact that the final transformer stage will have on
+the
+
+Our model follows a modified version of the CoAtNet architecture \cite{b9}. The CoAtNet architecture
+consists of stacked convolution and multi-head self-attention layers. The original network is organized into 5
+stages \((S0, S1, S2, S3, S4)\) where at each stage spatial size is reduced by a factor of 2 and the number of channels is increased.
+S0 is the convolutional stem; S1 \& S2 are MBConv blocks with
+squeeze-excitation, and S3 \& S4 are Transformer blocks. However, since they targeted the ImageNet-1K
+dataset that contained images of size \(256 \times 256\), the greater number of stages with a smaller factor
+decreased to was more appropriate; for our purposes we will apply the same size reduction principle
+but for only three stages \(S0, S1, S2\): S0 for the convolutional stem, S1 for MBConv blocks, and S2 for
+Transformer blocks.
+
+\paragraph{Privacy} is achieved via usage of Renyi-DP definition
+to track privacy leakage throughout training and then convert to
+equivalent \(\epsilon, \delta\) parameters as shown in Dr. Lee and Kifer's work \cite{b3}. Furthermore,
+we will use their work as the basis for using private convolution, LayerNorm, and multi-head attention layers.
+
+\paragraph{TAN} or Total Amount of Noise has been found to be the only contribution factor during
+training to exhausting the privacy budget under Renyi-DP \cite{b7}. A good choice of the
+privacy-preserving hyperparameters
+\((q, \sigma, S)\) can lead to much better accuracy at significantly smaller mini-batch sizes, a desirable
+property for preserving the privacy budget. We intend to utilize a similar approach to the designers
+of the TAN training strategy which includes a privacy parameter search.
+
+Evaluation accuracy will be measured for models with varying
+numbers of blocks and channels. We will use the smallest model
+used by the CoAtNet authors, CoAtNet-0 as the basis for the largest model we will try, as their model was intended to work
+on a significantly larger set of data and image size. The following is an example of varying models, where
+\(L\) is the number of blocks and \(D\) is the number of channels:
+
+% Table with 8 columns: Stages, Size, PCoAtNet-0, PCoAtNet-1, PCoAtNet-2, PCoAtNet-3, PCoAtNet-4, PCoAtNet-5
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+    \textbf{Stages} & \textbf{Size} & \textbf{PCoAtNet-0} & \textbf{PCoAtNet-1} & \textbf{PCoAtNet-2} & \textbf{PCoAtNet-3} & \textbf{PCoAtNet-4} \\
+    \hline
+    S0-Conv & \(\nicefrac{1}{2}\) & L=2, D=32  & L=2, D=32 & L=2, D=32 & L=2, D=48 & L=2, D=64 \\
+    S1-MbConv & \(\nicefrac{1}{4}\)  & L=1, D=48 & L=2, D=48 & L=2,D=48 & L=2, D=64 & L=2, D=96\\
+    S2-TFM_{rel} & \(\nicefrac{1}{8}\)  & L=1,D=96 & L=1,D=96 & L=2,D=96 & L=2, D=128 & L=2, D=192 \\
+    \hline
+    \end{tabular}
+\end{table}
+
+% cross entropy loss function
+3, 8, 6, 9
+
+9, 6, 8, 3
+
+
+Save the citations:
+
+\bibitem{b1} Abadi, M., Chu, A., Goodfellow, I., McMahan, H. B., Mironov, I., Talwar, K., \& Zhang, L. (2016). Deep learning with differential privacy. Proceedings of the 2016 ACM SIGSAC Conference on Computer and Communications Security. https://doi.org/10.1145/2976749.2978318.
+\bibitem{b2} Mironov, I. (2017). Rényi Differential Privacy. 2017 IEEE 30th Computer Security Foundations Symposium (CSF). https://doi.org/10.1109/csf.2017.11
+\bibitem{b3} Lee, J., \& Kifer, D. (2020). Scaling up differentially private deep learning with fast per-example gradient clipping. Proceedings on Privacy Enhancing Technologies, 2021(1), 128–144. https://doi.org/10.2478/popets-2021-0008
+\bibitem{b4} Abadi, M., Chu, A., Goodfellow, I., McMahan, H. B., Mironov, I., Talwar, K., \& Zhang, L. (2016). \textit{Deep Learning with Differential Privacy}. doi:10.1145/2976749.2978318
+\bibitem{b5} Yu, D., Zhang, H., Chen, W., Yin, J., \& Liu, T.-Y. (2021). Large Scale Private Learning via Low-rank Reparametrization. International Conference on Machine Learning. doi:10.48550/arXiv.2106.09352
+\bibitem{b6} De, S., Berrada, L., Hayes, J., Smith, S. L., \& Balle, B. (2022). Unlocking High-Accuracy Differentially Private Image Classification through Scale. doi:10.48550/arXiv.2204.13650
+\bibitem{b7} Sander, T., Stock, P., \& Sablayrolles, A. (2023). TAN Without a Burn: Scaling Laws of DP-SGD. doi:10.48550/arXiv.2210.03403
+\bibitem{b8} Dhyani, N., Mo, J., Cho, M., Joshi, A., Garg, S., Reagen, B., \& Hegde, C. (n.d.). PriViT: Vision Transformers for Fast Private Inference. https://doi.org/10.48550/arXiv.2310.04604
+\bibitem{b9} Dai, Z., Liu, H., Le, Q. V., & Tan, M. (2021). CoAtNet: Marrying Convolution and Attention for All Data Sizes. https://doi.org/10.48550/arXiv.2106.04803
