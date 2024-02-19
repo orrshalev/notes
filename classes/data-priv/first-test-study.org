@@ -1,0 +1,29 @@
+#+title: First Test Study
+
+* P1
+- Re-identification
+- k-anonymity, l-diversity
+- Composition attack
+- Privacy game
+- Random variable: \Omega, X, P[X = x]
+- Expectation is linear
+- Conditional probability
+- Posterior vs prior
+- Variance
+- risk = expectation[loss] = \sum_{threats} loss \times probability[threat]
+* P2
+- Interactive vs. non-interactive setting
+- Randomized algorithm
+- Variance is not linear
+- Formal definition of DP: (randomized) M is DP if for all solutions in range(M) and for
+  all pairs of neighboring datasets, P[M(D_1) \in S]/P[M(D_2) \in S] <= exp(\epsilon) where \epsilon > 0
+  and the probability is take over the coin flip of M
+- Unbiased: E[M_q(D) - q(D)] = 0, utility = E[|M_q(D) - q(D)|]
+- Bayes theorem (slide 20)
+- Sensitivity = \Delta q = max_{D, D' \in U}||q(D) - q(D')||_1
+- Sensitivity examples (slide 27)
+- Laplace mechanism definition notation, maybe pdf?, variance
+- (\delta, \epsilon) formula
+- A randomized mechanism (\alpha, \beta)-usefulness is useful if with probabily 1 - \beta, |M_q(D) - q(d)| \leq \alpha
+- Post-processing invariance
+- Group privacy
