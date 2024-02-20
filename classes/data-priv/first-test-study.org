@@ -10,6 +10,7 @@
 - Conditional probability
 - Posterior vs prior
 - Variance
+- Law of large numbers, formal
 - risk = expectation[loss] = \sum_{threats} loss \times probability[threat]
 * P2
 - Interactive vs. non-interactive setting
@@ -17,7 +18,7 @@
 - Variance is not linear
 - Formal definition of DP: (randomized) M is DP if for all solutions in range(M) and for
   all pairs of neighboring datasets, P[M(D_1) \in S]/P[M(D_2) \in S] <= exp(\epsilon) where \epsilon > 0
-  and the probability is take over the coin flip of M
+  and the probability is taken over the coin flip of M
 - Unbiased: E[M_q(D) - q(D)] = 0, utility = E[|M_q(D) - q(D)|]
 - Bayes theorem (slide 20)
 - Sensitivity = \Delta q = max_{D, D' \in U}||q(D) - q(D')||_1
@@ -32,7 +33,7 @@
 - Gaussian mechism, Y ~ N(0, \sigma^2 \times I_k)
 - (\delta, \epsilon)-DP definition: for all neighboring for all S, P[M(D_1) \in S] \leq e^\epsilon \times P[M(D_2) \in S] + \delta
 - For (\delta, \epsilon) DP sensitivity is L_2
-- Gaussian mechanism: for \epsilon \leq 1 and \delta > 0, M(D) = q(D) + N(0, \sigma^2 \times I_k), where \sigma = \Delta_q\sqrt{2\log{2/\delta}} / \epsilon
+- Gaussian mechanism: for \epsilon \leq 1 and \delta > 0, M(D) = q(D) + N(0, \sigma^2 \times I_k), where \sigma = \Delta_q\sqrt{2\log{2 / \delta}} / \epsilon
 - Tail bound on privacy loss: Z denotes the privacy loss of mechanism M, the following tail bound implies (\epsilon, \delta) P[Z > \epsilon] \leq \delta
 - Advanced composition (slide 15), k-fold composition how to satisfy (also slide 15)
 ** Lecture notes

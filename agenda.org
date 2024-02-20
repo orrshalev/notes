@@ -1,10 +1,5 @@
 #+title: Agenda
 
-* My todo list
-** TODO Learn org agenda <2024-02-17 Sat>
-** TODO Read compviz book - chapter 3 <2024-02-19 Sat>
-** TODO Compilers, presentation, projects plans <2024-02-18 Sat>
-
 * Data Privacy
 ** PROJ BA report 1 <2024-03-08 Fri>
 ** PROJ Presentation 1 <2024-03-14 Thu>
