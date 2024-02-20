@@ -2,10 +2,19 @@
 
 * My todo list
 ** TODO Learn org agenda <2024-02-17 Sat>
-** TODO [#A] Set timeplan for test, quiz <2024-02-17 Sat>
-** TODO Read compviz book - chapter 1 <2024-02-17 Sat>
-** TODO Read privacy slides <2024-02-17 Sat>
-** TODO [#A] Clean litterboxs, add third <2024-02-17 Sat>
-** TODO [#A] Clean floor next to litterbox <2024-02-17 Sat>
+** TODO Read compviz book - chapter 3 <2024-02-19 Sat>
 ** TODO Compilers, presentation, projects plans <2024-02-18 Sat>
-** TODO Presentation date <2024-03-14 Sat>
+
+* Data Privacy
+** PROJ BA report 1 <2024-03-08 Fri>
+** PROJ Presentation 1 <2024-03-14 Thu>
+** PROJ Interim report <2024-03-29 Fri>
+** PROJ Presentation 2 <2024-04-11 Thu>
+** PROJ BA report 2 <2024-04-12 Fri>
+** PROJ Final Report <2024-04-26 Fri>
+
+* Computer Vision
+** PROJ Assignment 2 <2024-02-26 Mon>
+** PROJ Project Proposal <2024-03-12 Tue>
+* Compilers
+** PROJ Wrap up <2024-04-05 Fri>
