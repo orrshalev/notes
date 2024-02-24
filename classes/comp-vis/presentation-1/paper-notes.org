@@ -1,0 +1,10 @@
+#+title: Paper Notes
+
+* A Spectral Approach to Item Response Theory
+- page 1 and 2 provide some helpful applications related to applications in ranking systems and education
+- Page 2 has limitations of current \beta^*_i estimation techniques
+- P3 has definition of markov chain and pairwise differential measurement
+- Benefit - matrix is sparse so computation can be sped up, error bound, dont go in depth just discuss briefly
+- Algorithm in page 4
+* Optimal and Private Learning from Human Response Data
+- Algorithm in page 6
