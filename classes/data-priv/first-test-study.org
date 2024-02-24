@@ -3,7 +3,7 @@
 * P1
 - Re-identification
 - k-anonymity, l-diversity
-- Composition attack
+- Homogeneity, background, Composition attack
 - Privacy game
 - Random variable: \Omega, X, P[X = x]
 - Expectation is linear

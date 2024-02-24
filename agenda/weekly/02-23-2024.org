@@ -1,0 +1,17 @@
+#+title: 02 23 2024
+
+* Comp Vis
+** TODO [#A] Finish a2 <2024-02-24 Sat>
+** TODO [#A] Finish reading papers CV <2024-02-25 Sun>
+** TODO [#B] Paper outline start CV <2024-02-26 Mon>
+** TODO [#B] Start writing project outline CV <2024-02-28 Wed>
+
+* Data Priv
+** TODO [#A] TAN branch start <2024-02-26 Mon>
+** TODO [#A] TAN branch mods and start reading about privacy budget calculations <2024-02-27 Tue>
+** TODO [#B] Privacy budget calculations and talk to teammate <2024-02-28 Wed>
+
+* Life
+** Go home <2024-03-01 Fri>
+** TODO Figure out evaluation <2024-02-24 Sat>
+** TODO Cats appointment, ideally for March 15 or 18 <2024-02-26 Mon>
