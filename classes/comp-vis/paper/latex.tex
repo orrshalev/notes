@@ -1,0 +1,295 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Fast Training for Neural Radiance Fields via Voxel Representation}
+
+\author{\IEEEauthorblockN{Orr Shalev}
+\IEEEauthorblockA{\textit{School of Computing} \\
+\textit{University of Georgia}\\
+Athens, Georgia, United States \\
+orr.shalev@uga.edu}
+\and
+\IEEEauthorblockN{2\textsuperscript{nd} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address or ORCID}
+\and
+\IEEEauthorblockN{3\textsuperscript{rd} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address or ORCID}
+}
+
+\maketitle
+
+\begin{abstract}
+This is the abstract.
+\end{abstract}
+
+\section{Introduction (1000 words)}
+
+Introduction paragraph
+
+\subsection{Neural Radiance Fields}
+
+\subsection{Training of Neural Radiance Fields}
+
+\subsection{TensorRF}
+
+\subsection{DVGO}
+
+\section{Research Plan (1000 words)}
+
+Our project will consist of implementing and comparing TensoRF and DVGO. Both architectures
+are described thoroughly in their associated publications and will be the main source used
+to guide implementation. We will evaluate our implementations on the Synthetic NeRF dataset
+and compare training time and averaged rendering PSNR and SSIM scores to the results obtained
+by the designers of TensoRF and DVGO.
+
+\subsection{TensorRF}
+
+Two major versions of TensoRF exist: TensoRF-CP which applies traditional CANDECOMP/PARAFAC
+decomposition, while TensoRF-VM uses a novel vector-matrix decomposition which was designed by
+the authors to improve performance. Thus, our first task for implementing TensoRF will involve
+implementing the two decomposition techiques.
+
+\paragraph{TensoRF-CP} The simpler decomposition method metioned by the authors was
+TensoRF-CP.
+It consists of factoring a tensor \(\mathcal{T} \in \mathbb{R}^{I \times J \times K}\) into
+
+\[\mathcal{T} = \sum_{r=1}^{R} v_{r}^{1} \circ v_{r}^{2} \circ v_{r}^{3}\]
+
+where \(v_{r}^{1} \circ v_{r}^{2} \circ v_{r}^{3}\) is a rank-one component,
+\(v_{r}^{1} \in \mathbb{R}^I\),  \(v_{r}^{2} \in \mathbb{R}^J\), and \(v_{r}^{3} \in \mathbb{R}^K\)
+are factorized vectors of the three modes for the \(r\)th component.
+Superscripts are the modes of each factor; \(\circ\) represents the outer product.
+Each tensor element \(\mathcal{T}_{ijk}\) is a sum of scalar products:
+
+\[T_{ijk} = \sum_{r=1}^{R} v_{r,i}^{1}v_{r,j}^{2}v_{r,k}^{3}\]
+
+where \(i, j, k\) denote the indices of the three modes.
+
+CP has been implemented by the TensorLy library for Python, and according to the
+authors minimal modification is necessary to use it for TensoRF-CP so we do not
+expect it to take much of development time.
+
+\paragraph{TensoRF-VM} The authors of TensoRF designed a specialized decomposition
+inspired by block term decomposition (BTD)
+method that they have found to be more effective for radiance field reconstruction.
+For a tensor \(\mathcal{T} \in \mathbb{R}^{I \times J \times K}\) the factorization decomposes it into multiple vectors and
+matrices:
+
+\[\mathcal{T} = \sum_{r=1}^{R_1}v_{r}^{1} \circ M_{r}^{2,3} + \sum_{r=1}^{R_2}v_{r}^{2} \circ M_{r}^{1,3} + \sum_{r=1}^{R_3}v_{r}^{3} \circ M_{r}^{1,2}\]
+
+where \(M_{r}^{2,3} \in \mathbb{R}^{J \times K}\),
+\(M_{r}^{1,3} \in \mathbb{R}^{I \times K}\), and
+\(M_{r}^{1,2} \in \mathbb{R}^{I \times J}\) are matrix factors for two of the three modes.
+
+In the context of radiance fields, the three modes correspond to the \(XYZ\) axes,
+and \(R_1 = R_2 = R_3\) as most scenes are equally complex along their three axes.
+Thus, decomposition can be rewritten as
+
+\[\mathcal{T} = \sum_{r=1}^{R}v_{r}^{X} \circ M_{r}^{Y,Z} + v_{r}^{Y} \circ M_{r}^{X,Z} + v_{r}^{Z} \circ M_{r}^{X,Y}\]
+
+The tensor element \(\mathcal{T}_{ijk} \) can be described as:
+
+\[\mathcal{T}_{ijk} = \sum_{r=1}^{R} \sum_{m} \mathcal{A}^{m}_{r,ijk}\]
+
+where \(m \in XYZ\), \(A_{r,ijk}^{X} = v_{r,i}^{X}M_{r,jk}^{YZ}\),
+\(A_{r,ijk}^{Y} = v_{r,j}^{Y}M_{r,ik}^{XZ}\), and
+\(A_{r,ijk}^{Z} = v_{r,k}^{Z}M_{r,ij}^{XY}\). We expect the implementation of this
+decomposition technique to take more effort than CP (elaborate?).
+
+\paragraph{Feature grids and radiance field} To represent the radiance field
+in TensoRF, interpolation is performed to match a 3D location \(x\) and direction
+\(d\) to a 3D grid \mathcal{G} with per-pixel multi-channel features, including
+\(\mathcal{G}_{\sigma}\) and \(\mathcal{G}_{c}\) to represenet volume density and
+view-dependent color respectively. Thus, radiance fields in
+implementation will be modeled as
+
+\[\sigma,c = \mathcal{G}_{\sigma}(x), S(\mathcal{G}_{c}(x), d)\]
+
+where \(\mathcal{G}_{\sigma}\) and \(\mathcal{G}_{c}\) are represeneted as factorized tensors.
+
+\paragraph{Factorized radiance fields}
+
+\(\mathcal{G}_{\sigma} \in \mathbb{R}^{I \times J \times K}\) is a 3D tensor while \(\mathcal{G}_{c} \in \mathbb{R}^{I \times J \times K \times P}\) is a 4D vector,
+were \(I, J, K\) represent the \(X, Y, Z\) grid while \(P\) is the number
+of appearance feature channels. In this context, \(\mathcal{G}_{\sigma}\) is
+factorized as follows:
+
+\[G_{\sigma} = \sum_{r=1}^{R_{\sigma}} \sum_{m \in X Y Z} A_{\sigma, r}^{m}\]
+
+Meanwhile, \(\mathcal{G}_C\) requires an extra dimention for feature channels,
+so is factorized as follow:
+
+\[\mathcal{G}_c = \sum_{r=1}^{R_c} A_{c,r}^{X} \circ b_{3r-2} + A_{c,r}^{Y} \circ b_{3r-1} + A_{c,r}^{Z} \circ b_{3r}\]
+
+where there are \(3 \times R_c\) vectors \(b_r\) to match the total number of components.
+The total factorization requires \(3 \times R_{\sigma} + 3 \times R_{c}\) matrices and
+\(3 \times R_{\sigma} + 6 \times R_{c}\) vectors, with \(R_\sigma \ll X, Y, Z,
+R_c \ll X, Y, Z\). The appearance feature-mode vectors \(b_r\) can be represeneted
+as a single global matrix \(B\) of size \(P \times 3 \times R_c\).
+
+
+\paragraph{Feature evaluation}
+
+Via trilinier interpolation, we will extract continuous fields from the XYZ-mode
+vector/matrix factor. The interpolated value for a component tensor
+\(A_r^X(x) = v_r^X(x)M_r^{Y,Z}(y,z)\) where \(A_r^X(X)\) is \(A_r\)'s trilinearly
+interpolated value at location \(x = (x,y,z)\), \(v_r^X(x)\) is \(v_r^X\)'s linearly
+interpolated value at \(x\) along the \(X\) axis, and \(M_r^{Y,Z}(y,z)\) is
+\(M_r^{Y,Z}\)'s bilnearly interpolated value at \((x,y)\) in the \(YZ\) plane.
+Thus, trilinear interpolating the two grids is expressed as
+
+\[\mathcal{G}_{\sigma}(x) = \sum_r \sum_m A_{\sigma , r}^m(x)\]
+
+\[\mathcal{G}_{c}(x) = B(\otimes[A_{c,r}^m(x)]_{m,r})\]
+
+\paragraph{Rendering and reconstruction}
+
+The factorized tensorial radiance field is expressed as
+
+\[\sigma, c = \sum_r \sum_m A_{\sigma, r}^m(x), S(B(\otimes[A_{c,r}^m(x)]_{m,r}), d)\]
+
+For volume rendering, the classic technique of volume rendering is used. This
+involves marching along a ray for each pixel, sampling \(Q\) shading points along
+the ray and computing the pixel color by:
+
+\[C = \sum_{q=1}^{Q} \tau_q(1 - exp(-\sigma_q \Delta_q))c_q, \tau_q = exp(-\sum_{p=1}^{q-1} \sigma_p \Delta_p)\]
+
+where \(\sigma_q, c_q\) are the density and color computer by the model at the sampled location \(x_q\), \(\Delta_q\) is the ray step size and \(\tau_q\) is the transimttance.
+
+To optimize the algorithm, gradient descent is used while trying to minimze L2 rendering
+loss and include an L1 norm loss and total variation loss regularization terms.
+
+\subsection{DVGO}
+
+\paragraph{Post-activated density voxel grid}
+
+The authors of DVGO represent querying of the volume density
+for any 3D position \(x\)
+via a voxel-grid as a series of functions, beginning with an interpolation function:
+
+\[interp(x,V): (\mathbb{R}^3, \mathbb{R}^{N_x \times N_y \times N_z} \rightarrow \mathbb{R}^1)\]
+
+where \(x\) is the queried 3D point, \(V\) is the voxel grid, \(C\) is the dimention of the modality, and \(N_x \times N_y \times N_z\) is the number of voxels. The interpolated
+value then is used as input to a shifted softplus:
+
+\[\sigma' = softplus(interp(x,V)) = \log(1 + \exp(interp(x,V) + b))\]
+
+where \(b\) is the shift hyperparemeter. Finally, post-activation is used:
+
+\[\alpha = 1 - \exp(-\sigma'\delta)\]
+
+where \(delta\) is the distance to the adjacent sampled point (step size when
+marching along ray).
+
+\paragraph{Coarse Geometry Searching}
+
+In DVGO, the scene is represented using coarse geometry for areas dominated by free space.
+The coarse density voxel grid can be represented as:
+
+\[V^{(density)(c)} \in R^{N_x^c \times N_y^c \times N_z^c}\]
+
+where \(c\) superscript denotes coarse.
+
+A query of any 3D point is represented as
+
+\[\sigma'^{c} = interp(x,V^{(density)(c)})\]
+
+\[c^{(c)} = interp(x,V^{(rgb)(c)})\]
+
+
+A hyperparamter \(M^{(c)}\) denotes the expeceted total numer of voxels in the coarse stage
+is used to determine the size of the bouding box
+seperating the coarse from fine regions; using it the voxel size can be calculated:
+
+\[s^{(c)} = \sqrt^3{L_x^{(c)} \times L_y^{(c)} \times L_z^{(c)} / M^{(c)}}\]
+
+where \(L_x^{(c)}, L_y^{(c)}, L_z^{(c)}\) are the lenghts of the bounding box. From that,
+the number of voxels on each side of the bounding box can be calculated:
+
+\[N_x^{c}, N_y^{c}, N_z^{c} = \lfloor L_x^{(c)} / s^{(c)} \rfloor, \lfloor L_y^{(c)} / s^{(c)} \rfloor, \lfloor L_z^{(c)} / s^{(c)} \rfloor\]
+
+For coarse geometry, training begins with all grid values in \(V^{(density)(c)}\) to 0
+(to represent low importance) and set the shift hyperparamter \(b\):
+
+\[b = \log((1 - \alpha^{(init)(c)})^{- \frac{1}{s^{(c)}}} - 1)\]
+
+where \(\alpha^{(init)(c)}\) is a hyperparamter.
+
+The learning rate for different points \(v_i \in V^{(density)(c)}\) is determined
+by counting the number of training views \(n_i\) to which point \(v_i\) is visible,
+then scale its base learning rate by \(n_i / n_{max}\), where \(n_{max}\) is the maximum
+view count over all grid points.
+
+Reconstruction is done similarly to in TensoRF, with L2 loss being used with stoachastic
+gradient descent, and background entropy loss is used for regularization.
+
+\paragraph{Fine Detail Reconstruction}
+
+Once the coarse geometry \(V^{(density)(c)}\) is found, it is used as a component to
+findin the higher-resoultion density voxel grid
+\(V^{(density)(f)} \in \mathbb{R}^{N_x^f \times N_y^f \times N_z^f}\)
+
+where the \((f)\) superscript is used to denote fine geometry. The volume density
+is found similarly to before:
+
+\[\sigma'^{(f)} = interp(x, V^{(density)(f)})\]
+
+However, an additional find voxel space for feature representation is added associated
+\(V^{(feat)(f)} \in \mathbb{R}^{D \times N_x^f \times N_y^f \times N_z^f}\), where \(D\) is
+a hyperparameter representing feature-space dimention. Then, a shallow MLP
+parameterized by \(\Theta\) which takes as input the interpolated volume, position,
+and viewing direction is used:
+
+\[c^{(f)} = MLP_{\Theta}^{(rgb)}(interp(x, V^{(feat)(f)}), x, d)\]
+
+To find which areas of \(V^{(density)(c)}\) should be better represented in
+\(V^{(density)(f)}\), the coarse geometry is queried to find the unknown space in
+po9ints where the density found is greater than \(\tau^{(c)}\). A bounding box
+for the unkown space with hyperparameter \(M^{(f)}\) can be found in the same way as
+for the course stage.
+
+Progressive scaling is applied to the voxel grids \(V^{(density)(f)}\)
+and \(V^{(density)(f)}\) by initially setting the number of voxels to be
+\(\lfloor M^{(f)} / 2^{|p|} \rfloor\)
+where \(p\) is the number of training checkpoints and doubling the number
+of voxels (via trilinear interpolation) at each checkpoint, such that after \(p\)
+steps the number of voxels is \(M^{(f)}\).
+
+Once the fine geometry has been calculated, some areas may still be free within;
+those can be skipped in both training and testing by ignoring points with
+density less than \(\tau^{(f)}\)
+
+Training is performed in the same way as in the coarse stage except for a smaller
+regularization term.
+
+
+\section{Schedule}
+
+\section{Work Done}
+
+
+\begin{thebibliography}{00}
+
+\bibitem{b1} C. Sun, M. Sun, and H.-T. Chen, “Direct voxel grid optimization: Super-fast convergence for radiance fields reconstruction,” 2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Jun. 2022. doi:10.1109/cvpr52688.2022.00538
+
+\bibitem{b2} A. Chen, Z. Xu, A. Geiger, J. Yu, and H. Su, “Tensorf: Tensorial radiance fields,” Lecture Notes in Computer Science, pp. 333–350, Mar. 2022. doi:10.1007/978-3-031-19824-3_20
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,27 @@
+#+title: Quiz2
+
+* New material
+
+Formal definition of hypothesis class, example with linear hypothesis class
+
+Probability distribution notation, classifier probability notation, for multiclass, including how prediction is given (3-4 formulas)
+
+Example of deep learning formal notation
+
+Formal description of loss function, 1-0 loss, cross entropy
+
+Risk minimization formula, approximating empirical risk, tie in to LLN
+
+Formally defining training
+
+Definition of derivative
+
+Show product rule, sum rule, chain rule
+
+Show what a gradient, hessian is. Show example of each on function
+
+\[f(x_1, x_2) = x_1^3 + x_1^2 - x_1x_2 + x_2^2 + 5x_1 + 8x_1 + 8x_2 + 4\]
+
+Why do we calculate first and second derivatives?
+
+Write algorithm for non-private, private SGD
