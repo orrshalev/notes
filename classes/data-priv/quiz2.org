@@ -25,3 +25,21 @@ Show what a gradient, hessian is. Show example of each on function
 Why do we calculate first and second derivatives?
 
 Write algorithm for non-private, private SGD
+
+Show sensitivity of SGD
+
+How to gurantee per-example gradients are bound, how to find \(\bar{g}_i\), formula for new gradient function including distribution drawn from
+
+Show how pre-activations, activations are calculated
+
+Why convolution
+
+What happens in forward step, what happens in backward step, gradient decomposition of loss with respect to weight
+
+* Old material
+
+Formal definition of DP
+
+Explain composability, post-processing invariance
+
+Answer questions 2,5
