@@ -1,4 +1,1 @@
 #+title: Orr's Notes About Everything
-
-* Table of Content
-+ [[file:emacs/README.org][Emacs]]

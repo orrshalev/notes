@@ -1,0 +1,10 @@
+#+title: ISLR
+
+* Normal trees
+- A tree divides the predictor space into distinct regions
+- The prediction is the mean response of observed data in that region
+- RSS is residual sum of squares, \(\text{MSE} = \frac{1}{2} \times \text{RSS}\)
+- Goal is find \(R__{1}, R_{2}, ... R_{j}\) such that \(\sum_{j=1}^{J} \sum_{i \in R_{j}} (y_{i} - \hat{y}_{R_{j}})^{2}\) is minimized
+- Greedy approach to splitting is to recursively split region based on some prediction \(X_{j}\) and some cutpoint \(s\) such that RSS is most reduced.
+- Covariance: \(\frac{1}{N - 1} \sum_{i = 1}^{N} (x_{i} - \bar{x})(y_{i} - \bar{y})\)
+- k
