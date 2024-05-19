@@ -1,25 +1,25 @@
 #+title: Interview Questions
 
-* What is machine learning?
-* What tasks does machine learning solve?
-* What is gradient descent?
-* What is overfitting, and how can it be avoided?
-* How can you handle missing data?
-* How do you choose a which model to use for a particular problem?
-* What is precision and recall in the context of classification?
-* What is deep learning?
-* Explain k-nearest neighbors algorithm?
-* What are methods of reducing dimentionality? Why might they be beneficial?
-* What is variance? What is covariance?
-* What is cross-validation?
-* Why is computer vision a challenging problem? Why does it often take long to train computer vision models?
-* What are synthetic datasets? How can they be useful?
-* What is an ROC curve? How to interpret?
-* What is GINI index? Entropy? What are they used for?
-* Explain the bias-variance tradeoff of predictive models
-* Explain the prediction accuracy-interpretability tradeoff
-* Explain tree-based methods
-* How are regression trees grown? How are they pruned?
-* What is random forest? Gradient boosted trees? Pros and cons of each?
-* What is regularization? Use case?
-* What is normalization? Use case?
+- What is machine learning?
+- What tasks does machine learning solve?
+- What is gradient descent?
+- What is overfitting, and how can it be avoided?
+- How can you handle missing data?
+- How do you choose a which model to use for a particular problem?
+- What is precision and recall in the context of classification?
+- What is deep learning?
+- Explain k-nearest neighbors algorithm?
+- What are methods of reducing dimentionality? Why might they be beneficial?
+- What is variance? What is covariance?
+- What is cross-validation?
+- Why is computer vision a challenging problem? Why does it often take long to train computer vision models?
+- What are synthetic datasets? How can they be useful?
+- What is an ROC curve? How to interpret?
+- What is GINI index? Entropy? What are they used for?
+- Explain the bias-variance tradeoff of predictive models
+- Explain the prediction accuracy-interpretability tradeoff
+- Explain tree-based methods
+- How are regression trees grown? How are they pruned?
+- What is random forest? Gradient boosted trees? Pros and cons of each?
+- What is regularization? Use case?
+- What is normalization? Use case?
