@@ -1,0 +1,5 @@
+#+title: Review
+
+* Chapter 5
+- Do derivation of backpropogation in 5.3 by hand
+- Read Xaviar initialization in 5.4
